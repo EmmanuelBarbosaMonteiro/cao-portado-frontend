@@ -15,12 +15,12 @@ export default async function SignIn() {
       {/* login container */}
       <div className="flex max-w-3xl rounded-xl bg-gray-100 p-5 shadow-lg">
         {/* form */}
-        <div className="px-16 sm:w-1/2">
+        <div className="px-10 sm:w-1/2">
           <div className="flex items-center justify-center">
-            <Image src={logo} alt="" className="h-15 w-15 object-cover" />
+            <Image src={logo} alt="" className="h-15 w-15 -mt-8 object-cover" />
           </div>
 
-          <h2 className="text-2xl font-bold text-green-400">Login</h2>
+          <h2 className="text-custom-green-500 text-2xl font-bold">Login</h2>
           <p className="mt-4 text-sm text-gray-700">
             Faca seu login ou se cadastre-se
           </p>
@@ -45,7 +45,7 @@ export default async function SignIn() {
             </div>
             <button
               disabled
-              className="rounded-md bg-green-400 py-2 text-gray-100 disabled:cursor-not-allowed disabled:bg-green-200 disabled:text-gray-400"
+              className="bg-custom-green-500 rounded-md py-2 text-gray-100 disabled:cursor-not-allowed disabled:text-neutral-50 disabled:opacity-40"
             >
               Continuar
             </button>
@@ -65,7 +65,7 @@ export default async function SignIn() {
         </div>
 
         {/* image */}
-        <div className="hidden w-1/2 p-5 sm:block">
+        <div className="hidden w-1/2 p-0 sm:block">
           <Image src={dog} alt="" className="h-full rounded-xl object-cover" />
         </div>
       </div>

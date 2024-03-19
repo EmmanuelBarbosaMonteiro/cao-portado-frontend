@@ -1,5 +1,6 @@
 import { Eye } from 'lucide-react'
 import dog from '@/assets/dogs.jpg'
+import logo from '@/assets/logo.png'
 import Image from 'next/image'
 import { Metadata } from 'next'
 
@@ -15,10 +16,12 @@ export default async function SignUp() {
       {/* login container */}
       <div className="flex max-w-3xl rounded-xl bg-gray-100 p-5 shadow-lg">
         {/* form */}
-        <div className="px-16 sm:w-1/2">
-          <h2 className="text-2xl font-bold text-green-400 sm:mt-14">
-            Cadastro
-          </h2>
+        <div className="px-10 sm:w-1/2">
+          <div className="flex justify-center">
+            <Image src={logo} alt="" className="h-15 w-15 object-cover" />
+          </div>
+
+          <h2 className="text-custom-green-500 text-2xl font-bold">Cadastro</h2>
 
           <form action="" className="flex flex-col gap-4">
             <input
@@ -66,14 +69,14 @@ export default async function SignUp() {
               />
               <Eye className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400 antialiased hover:text-gray-500" />
             </div>
-            <button className="mt-3 rounded-md bg-green-400 py-2 text-gray-50 hover:bg-green-500 hover:text-gray-100 disabled:cursor-not-allowed disabled:bg-green-200 disabled:text-gray-400">
+            <button className="bg-custom-green-500 mt-6 rounded-md py-2 text-gray-50 hover:opacity-80 disabled:cursor-not-allowed disabled:bg-green-200 disabled:text-gray-400">
               Continuar
             </button>
           </form>
         </div>
 
         {/* image */}
-        <div className="hidden w-1/2 p-5 sm:block">
+        <div className="hidden w-1/2 p-0 sm:block">
           <Image src={dog} alt="" className="h-full rounded-xl object-cover" />
         </div>
       </div>

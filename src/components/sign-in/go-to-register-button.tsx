@@ -12,7 +12,7 @@ export default function NavigationRegisterButton() {
   return (
     <button
       onClick={handleClick}
-      className="mt-5 w-full rounded-md bg-green-400 py-2 text-gray-50 hover:bg-green-500 hover:text-gray-100"
+      className="bg-custom-green-500 mt-5 w-full rounded-md py-2 text-gray-50 hover:opacity-80"
     >
       Faça seu cadastro
     </button>

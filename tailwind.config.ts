@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        'custom-green-500': '#25B5A1',
+      },
       fontFamily: {
         sans: 'var(--font-inter)',
       },
