@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import NextAuthSessionProvider from '@/providers/sessionProvider'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
@@ -17,7 +18,9 @@ export default function RootLayout({
     <html className={inter.variable} lang="pt antialiased">
       <body>
         <div className="min-h-screen bg-gray-50">
-          <main>{children}</main>
+          <main>
+            <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
+          </main>
         </div>
       </body>
     </html>

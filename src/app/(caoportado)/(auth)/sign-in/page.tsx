@@ -1,15 +1,48 @@
-import { Metadata } from 'next'
+'use client'
+
+// import { Metadata } from 'next'
 import dog from '@/assets/dogs.jpg'
 import Image from 'next/image'
 import logo from '@/assets/logo.png'
-import { Eye } from 'lucide-react'
-import NavigationRegisterButton from '@/components/sign-in/go-to-register-button'
+import { SyntheticEvent, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 
-export const metadata: Metadata = {
+/* export const metadata: Metadata = {
   title: 'Login | Caoportado',
-}
+} */
 
-export default async function SignIn() {
+export default function SignIn() {
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [error, setError] = useState(false)
+
+  const isButtonDisabled = email === '' || password === ''
+
+  const router = useRouter()
+
+  const handleClick = () => {
+    router.push('/sign-up')
+  }
+
+  async function handleSubmit(event: SyntheticEvent) {
+    event.preventDefault()
+
+    const result = await signIn('credentials', {
+      email,
+      password,
+      redirect: false,
+    })
+
+    if (result?.error) {
+      console.log(result)
+      setError(true)
+      return
+    }
+
+    router.replace('/customer')
+  }
+
   return (
     <section className="flex min-h-screen items-center justify-center">
       {/* login container */}
@@ -17,35 +50,44 @@ export default async function SignIn() {
         {/* form */}
         <div className="px-10 sm:w-1/2">
           <div className="flex items-center justify-center">
-            <Image src={logo} alt="" className="h-15 w-15 -mt-8 object-cover" />
+            <Image
+              src={logo}
+              alt=""
+              className="h-15 w-15 -mt-8 object-cover"
+              width={150}
+              height={150}
+            />
           </div>
 
-          <h2 className="text-custom-green-500 text-2xl font-bold">Login</h2>
+          <h2 className="text-2xl font-bold text-custom-green-500">Login</h2>
           <p className="mt-4 text-sm text-gray-700">
             Faca seu login ou se cadastre-se
           </p>
 
-          <form action="" className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <input
-              className="mt-8 rounded-md border p-2"
+              className={`mt-8 rounded-md border p-2 ${error ? 'border-red-500' : 'border-gray-300'}`}
               type="text"
               name="email"
               id="email"
+              required
               placeholder="E-mail"
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <div className="relative">
-              <input
-                className="w-full rounded-md border p-2"
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Senha"
-              />
-              <Eye className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400 antialiased hover:text-gray-500" />
-            </div>
+
+            <input
+              className={`mt-8 rounded-md border p-2 ${error ? 'border-red-500' : 'border-gray-300'}`}
+              type="password"
+              name="password"
+              id="password"
+              required
+              placeholder="Senha"
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <button
-              disabled
-              className="bg-custom-green-500 rounded-md py-2 text-gray-100 disabled:cursor-not-allowed disabled:text-neutral-50 disabled:opacity-40"
+              disabled={isButtonDisabled}
+              type="submit"
+              className={`${isButtonDisabled ? 'opacity-50' : 'opacity-100'} rounded-md bg-custom-green-500 py-2 text-gray-100 hover:opacity-80 disabled:cursor-not-allowed disabled:text-neutral-50 disabled:opacity-40`}
             >
               Continuar
             </button>
@@ -57,7 +99,13 @@ export default async function SignIn() {
             <hr className="border-gray-500" />
           </div>
 
-          <NavigationRegisterButton />
+          <button
+            disabled={!isButtonDisabled}
+            onClick={handleClick}
+            className={`${!isButtonDisabled ? 'opacity-50' : 'opacity-100'} mt-5 w-full rounded-md bg-custom-green-500 py-2 text-gray-50 hover:opacity-80`}
+          >
+            Faça seu cadastro
+          </button>
 
           <p className="mt-5 border-t py-6 text-sm text-gray-500 hover:cursor-pointer hover:text-gray-700 hover:underline">
             Esqueceu sua senha?

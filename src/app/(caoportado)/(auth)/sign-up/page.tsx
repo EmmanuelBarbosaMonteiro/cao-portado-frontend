@@ -18,7 +18,13 @@ export default async function SignUp() {
         {/* form */}
         <div className="px-10 sm:w-1/2">
           <div className="flex justify-center">
-            <Image src={logo} alt="" className="h-15 w-15 object-cover" />
+            <Image
+              src={logo}
+              alt=""
+              className="h-15 w-15 object-cover"
+              width={150}
+              height={150}
+            />
           </div>
 
           <h2 className="text-custom-green-500 text-2xl font-bold">Cadastro</h2>
